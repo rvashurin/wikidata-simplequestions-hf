@@ -131,16 +131,12 @@ class WikidataSimpleQuestions(datasets.GeneratorBasedBuilder):
         with open(filepath, encoding="utf-8") as f:
             for key, row in enumerate(f):
                 data = row.split("\t")
-                if (
-                    wikidata_vocab.get(data[0]) is not None
-                    and wikidata_vocab.get(data[2]) is not None
-                ):
-                    yield (
-                        key,
-                        {
-                            "subject": wikidata_vocab[data[0]],
-                            "property": data[1],
-                            "object": wikidata_vocab[data[2]],
-                            "question": data[3],
-                        },
-                    )
+                yield (
+                    key,
+                    {
+                        "subject": data[0],
+                        "property": data[1],
+                        "object": data[2],
+                        "question": data[3],
+                    },
+                )
